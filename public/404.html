@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <title>Single Page Apps for GitHub Pages</title>
     <script type="text/javascript">
-      // 核心脚本：保存当前错误的路径，然后重定向回 index.html
-      var pathSegmentsToKeep = 1; // 对应你的二级目录深度 (比如 /ecom-dashboard/ 深度为 1)
+      // 核心重定向：保存当前刷新的路由，并安全带回给首页
+      var pathSegmentsToKeep = 1; // 对应 /ecom-dashboard/ 深度为 1
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?p=' +
-        l.pathname.split('/').slice(1 + pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?' +
+        'p=' + l.pathname.split('/').slice(1 + pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
         (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
         l.hash
       );
