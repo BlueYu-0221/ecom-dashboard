@@ -8,4 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(), // 2. 注册插件
   ],
+  base: '/ecom-dashboard/',
 })
