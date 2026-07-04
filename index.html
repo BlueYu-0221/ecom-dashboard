@@ -5,24 +5,6 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ecom-dashboard</title>
-    <script type="text/javascript">
-      // 单页应用路由重定向解析脚本（彻底解决 GitHub Pages 刷新斜杠粘连问题）
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&') 
-          }).join('?');
-          
-          // 核心修复点：动态计算基础路径，并用 '/' 安全拼接子路由路径
-          var baseDirectory = l.pathname.replace(/\/$/, ''); 
-          window.history.replaceState(null, null,
-            baseDirectory + '/' + decoded.slice(1) + l.hash
-          );
-        }
-      }(window.location));
-    </script>
-    
-    
   </head>
   <body>
     <div id="root"></div>
