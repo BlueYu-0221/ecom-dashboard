@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import {
   BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   Navigate,
@@ -22,7 +23,7 @@ function App() {
   }, [init])
 
   return (
-    <BrowserRouter basename="/ecom-dashboard" >
+    <HashRouter >
       <Routes>
         <Route path="/login" element={<LoginPage />} />
 
@@ -69,10 +70,10 @@ function App() {
         </Route>
 
         {/* 默认重定向到后台 */}
-        <Route path="/" element={<Navigate to="./dashboard" replace />} />
-        <Route path="*" element={<Navigate to="./dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
