@@ -8,4 +8,4 @@ type: project
 
 **Why:** v3 中 `TooltipProps<number, string>` 不再暴露 `payload` / `label` 属性，直接用会导致 TS2339 编译错误（在严格模式 `noImplicitAny` 下 `payload.find` 的参数也会报 TS7006）。
 
-**How to apply:** 为自定义 Tooltip 组件手写一个宽松的 props 接口（含 `active?: boolean`、`label?: string`、`payload?: { dataKey?; value? }[]`）。参考 [`src/components/SalesTrendChart.tsx`](src/components/SalesTrendChart.tsx) 中的 `ChartTooltipProps`。
+**How to apply:** 为自定义 Tooltip 组件手写一个宽松的 props 接口（含 `active?: boolean`、`label?: string`、`payload?: { dataKey?; value? }[]`）。参考 [`src/components/dashboard/RevenueChart.tsx`](src/components/dashboard/RevenueChart.tsx) 中的 `ChartTooltipProps`。
