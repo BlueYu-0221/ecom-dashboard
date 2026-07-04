@@ -23,7 +23,7 @@ export default function DashboardLayout() {
 
   const handleSignOut = async () => {
     await signOut()
-    navigate('/login', { replace: true })
+    navigate('login', { replace: true })
   }
 
   return (

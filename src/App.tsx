@@ -22,7 +22,7 @@ function App() {
   }, [init])
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ecom-dashboard" >
       <Routes>
         <Route path="/login" element={<LoginPage />} />
 
@@ -69,8 +69,8 @@ function App() {
         </Route>
 
         {/* 默认重定向到后台 */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="dashboard" replace />} />
+        <Route path="*" element={<Navigate to="dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   )

@@ -18,7 +18,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
 
   const from =
-    (location.state as LocationState)?.from?.pathname ?? '/dashboard'
+    (location.state as LocationState)?.from?.pathname ?? 'dashboard'
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
