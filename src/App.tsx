@@ -5,12 +5,13 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom'
-import { Package, ShoppingCart, Truck } from 'lucide-react'
+import { ShoppingCart, Truck } from 'lucide-react'
 import { useAuthStore } from './store/useAuthStore'
 import ProtectedRoute from './components/ProtectedRoute'
 import LoginPage from './components/LoginPage'
 import DashboardLayout from './components/DashboardLayout'
 import DashboardHome from './components/DashboardHome'
+import ProductsPage from './components/ProductsPage'
 import PlaceholderPage from './components/PlaceholderPage'
 
 function App() {
@@ -36,16 +37,7 @@ function App() {
           }
         >
           <Route index element={<DashboardHome />} />
-          <Route
-            path="products"
-            element={
-              <PlaceholderPage
-                title="商品管理"
-                description="管理你的全球商品 SKU、定价与上下架状态。"
-                icon={Package}
-              />
-            }
-          />
+          <Route path="products" element={<ProductsPage />} />
           <Route
             path="orders"
             element={
