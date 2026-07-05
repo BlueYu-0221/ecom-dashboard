@@ -31,6 +31,21 @@ export default function LoginPage() {
     }
   }
 
+  const handleGuestSignIn = async () => {
+    setError('')
+    const guestEmail = 'admin@123.com'
+    const guestPassword = '123456'
+    // 同步填充输入框，让用户看到自动填入的账号密码
+    setEmail(guestEmail)
+    setPassword(guestPassword)
+    try {
+      await signIn(guestEmail, guestPassword)
+      navigate(from, { replace: true })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '登录失败，请重试')
+    }
+  }
+
   return (
     <div className="flex min-h-screen bg-slate-50">
       {/* 左侧品牌展示区 */}
@@ -120,6 +135,22 @@ export default function LoginPage() {
               {loading ? '登录中…' : '登 录'}
             </button>
           </form>
+
+          {/* 访客一键预览快捷登录 */}
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={handleGuestSignIn}
+              disabled={loading}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 py-2.5 font-semibold text-white shadow-lg shadow-orange-200 ring-2 ring-orange-300 transition hover:from-amber-500 hover:to-orange-600 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+              Sign in as Guest (One-click Preview)
+            </button>
+            <p className="mt-2 text-center text-xs text-slate-400">
+              Note: This connects to a live, secure Supabase testing environment.
+            </p>
+          </div>
 
           <p className="mt-6 text-center text-sm text-slate-400">
             忘记密码？请联系系统管理员
