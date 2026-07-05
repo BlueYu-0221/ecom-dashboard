@@ -3,9 +3,8 @@ name: Deploy React Vite App
 on:
   push:
     branches:
-      - main # 当你往 main 分支 push 代码时自动触发
+      - main
 
-# 赋予该工作流把打包产物写入 gh-pages 分支的绝对读写权限
 permissions:
   contents: write
 
@@ -17,15 +16,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/workspace-node@v4 # 线上加载 Node 运行环境
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install Dependencies
-        run: yarn install # 使用 yarn 安装依赖
+        run: yarn install
 
       - name: Build Project
-        run: yarn build # 使用 yarn 进行本地无错打包
+        run: yarn build
         env:
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
@@ -33,5 +32,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # Vite 打包出来的文件夹叫 dist，将它推送到线上
-          branch: gh-pages # 线上静态网站托管的分支
+          folder: dist
+          branch: gh-pages
