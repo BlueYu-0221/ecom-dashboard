@@ -3,51 +3,35 @@ name: Deploy React Vite App
 on:
   push:
     branches:
-      - main # 触发部署的分支
+      - main # 当你往 main 分支 push 代码时自动触发
 
-# 开启发布所需的权限
+# 赋予该工作流把打包产物写入 gh-pages 分支的绝对读写权限
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 避免重复部署
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  contents: write
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9 # 或者匹配你本地的 pnpm 版本
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/workspace-node@v4 # 线上加载 Node 运行环境
         with:
           node-version: 20
-          cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install Dependencies
+        run: yarn install # 使用 yarn 安装依赖
 
-      - name: Build
-        run: pnpm build # Vite 默认打包输出到 dist 目录
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist' # 上传打包后的文件夹
+      - name: Build Project
+        run: yarn build # 使用 yarn 进行本地无错打包
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # Vite 打包出来的文件夹叫 dist，将它推送到线上
+          branch: gh-pages # 线上静态网站托管的分支
