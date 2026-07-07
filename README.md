@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+Live Demo: [ecom-dashboard](https://blueyu-0221.github.io/ecom-dashboard/)
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
